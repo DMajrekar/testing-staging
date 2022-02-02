@@ -20,7 +20,7 @@ spec:
   firewall: b50f0fe0-175f-4bbb-9399-e731064abb17
   masters: 1
   pools:
-  - count: 10
+  - count: 3
     id: d98be4ba-8546-40df-ae5d-55a7239d4b0b
     size: g3.k3s.small
   storageclass: ms-xfs-2-replicas-local

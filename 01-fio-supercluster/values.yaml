@@ -1,4 +1,4 @@
-testCount: 30
+testCount: 90
 
 image:
   repository: yasker/kbench
@@ -8,6 +8,6 @@ image:
     
 volume:
   storageClassName: ms-xfs-3-replicas-local
-  size: 5
+  size: 10
 
 affinity: {}

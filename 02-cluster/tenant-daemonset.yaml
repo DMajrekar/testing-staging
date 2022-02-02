@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: fio-benchmark
+  labels:
+    app: fio-benchmark
+spec:
+  selector:
+    matchLabels:
+      app: fio-benchmark
+  template:
+    metadata:
+      labels:
+        app: fio-benchmark
+    spec:
+      containers:
+      - name: fio
+        image: yasker/kbench:latest
+        imagePullPolicy: Always
+        env:
+        #- name: QUICK_MODE  # for debugging
+        #  value: "1"
+        - name: FILE_NAME
+          value: "/mnt/test"
+        - name: SIZE
+          value: "5G" # must be 10% smaller than the PVC size due to filesystem also took space
