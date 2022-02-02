@@ -1,0 +1,46 @@
+{{- range (untilStep 0 (int .Values.testCount) 1) }}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  namespace: {{ $.Release.Namespace }}
+  name: bench-{{ . }}
+spec:
+  template:
+    metadata:
+      labels:
+        kbench: fio
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions: 
+                - key: kbench
+                  operator: In
+                  values: 
+                    - fio
+              topologyKey: "kubernetes.io/hostname"
+      containers:
+      - name: kbench
+        image: yasker/kbench:latest
+        imagePullPolicy: Always
+        env:
+        #- name: QUICK_MODE  # for debugging
+        #  value: "1"
+        - name: FILE_NAME
+          value: "/volume/test"
+        - name: SIZE
+          value: "{{ divf (mulf $.Values.volume.size 90) 100 | int }}G" # must be 10% smaller than the PVC size due to filesystem also took space
+        volumeDevices:
+        - name: vol
+          devicePath: /volume/test
+      restartPolicy: Never
+      volumes:
+      - name: vol
+        persistentVolumeClaim:
+          claimName: bench-vol-{{ . }}
+  backoffLimit: 0
+{{ end }}

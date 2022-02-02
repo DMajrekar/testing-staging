@@ -1,0 +1,31 @@
+apiVersion: stack.civo.com/v1alpha1
+kind: CivoFirewall
+metadata:
+  annotations:
+    default: "true"
+    label: Default
+  labels:
+    account_id: ""
+    cluster_id: ""
+  name: default
+  namespace: mayastor-testing
+spec:
+  firewall:
+    ingress:
+    - direction: ingress
+      from: 0.0.0.0/0
+      id: cad7413b-e4ac-4905-a7bd-86cd023949ee
+      label: Allow all inbound TCP
+      port: 1-65535
+      protocol: tcp
+    - direction: ingress
+      from: 0.0.0.0/0
+      id: 3fcb4a36-8350-45d9-8a67-83c025b8e7f7
+      label: Allow all inbound UDP
+      port: 1-65535
+      protocol: udp
+    - direction: ingress
+      from: 0.0.0.0/0
+      id: c844a781-20ee-4268-8476-8d88d5f3976a
+      label: Allow inbound ICMP
+      protocol: icmp

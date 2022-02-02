@@ -1,0 +1,13 @@
+testCount: 30
+
+image:
+  repository: yasker/kbench
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "latest"
+    
+volume:
+  storageClassName: ms-xfs-3-replicas-local
+  size: 5
+
+affinity: {}

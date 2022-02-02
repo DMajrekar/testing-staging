@@ -1,0 +1,16 @@
+{{- range (untilStep 0 (int .Values.testCount) 1) }}
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: bench-vol-{{ . }}
+  namespace: {{ $.Release.Namespace }}
+spec:
+  volumeMode: Block
+  storageClassName: {{ $.Values.volume.storageClassName }}
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ $.Values.volume.size }}Gi
+{{ end }}

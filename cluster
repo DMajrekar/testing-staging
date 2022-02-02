@@ -1,0 +1,27 @@
+apiVersion: stack.civo.com/v1alpha1
+kind: CivoK3sCluster
+metadata:
+  annotations:
+    account_url: https://www.civo.com/staff/accounts?account_search=959cc340-fda0-40b2-862f-f461d70518ab
+    applications: metrics-server,-Traefik
+    civo_api_url: https://api.civo.com
+    label: civo-nyc-01
+    suspended: "false"
+  labels:
+    account_id: 959cc340-fda0-40b2-862f-f461d70518ab
+    civo_api_key: joN6tKHUeJu3wPAVardYz5Qhn8iFcODsy07B4I0CZXfmWqTvSM
+    name: civo-nyc-01
+    network_id: a7f6424d-0e23-4e9e-8044-53eaa158cf0f
+    user_id: f9c63d6e-02a3-4c10-89a7-2b7ac7cf1562
+  name: civo-nyc-01-5d96-33a6c0
+  namespace: mayastor-testing
+spec:
+  database: in-built
+  firewall: b50f0fe0-175f-4bbb-9399-e731064abb17
+  masters: 1
+  pools:
+  - count: 10
+    id: d98be4ba-8546-40df-ae5d-55a7239d4b0b
+    size: g3.k3s.small
+  storageclass: ms-xfs-2-replicas-local
+  version: 1.20.0-k3s1
